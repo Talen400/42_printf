@@ -5,18 +5,22 @@ FLAGS = -Wall -Werror -Wextra
 
 SRC = $(wildcard *.c)
 HEADER = $(wildcard *.h)
-OBJ = $(SRC:.c=.o)
+OBJ_F = objs
+OBJ = $(addprefix $(OBJ_F)/,$(SRC:.c=.o))
 
-all: $(NAME)
+all: $(OBJ_F) $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $^ -o $@
 
-%.o:%.c
-	$(CC) $(FLAGS) $^ -c $@
+$(OBJ_F)/%.o:%.c
+	$(CC) $(FLAGS) -c $^ -o $@
+
+$(OBJ_F):
+	mkdir $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_F)
 
 fclean: clean
 	rm -f $(NAME)

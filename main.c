@@ -31,7 +31,9 @@ void       foo(char *fmt, ...)   /* '...' is C syntax for a variadic function */
 int main(void)
 {
 	foo("teste");
-	foo("123");
-	foo("\0");
-	foo("\n");
+	printf("%c\n", 1);
+	printf("%c\n", 32);
+	printf("%c\n", ' ');
+	printf("%c\n", '1');
+	printf("%c\n", '\n');
 }
