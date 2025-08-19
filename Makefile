@@ -1,17 +1,16 @@
 NAME = printf
 
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 
 SRC = $(wildcard *.c)
-HEADER = $(wildcard *.h)
 OBJ_F = objs
 OBJ = $(addprefix $(OBJ_F)/,$(SRC:.c=.o))
 
 all: $(OBJ_F) $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $^ -o $@
+	$(CC) $(FLAGS) $^ libft.a -o $@
 
 $(OBJ_F)/%.o:%.c
 	$(CC) $(FLAGS) -c $^ -o $@
