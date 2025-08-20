@@ -8,12 +8,10 @@ static void	ft_type(va_list ap, char *fmt)
 		ft_printstr(ap);
 	else if (*fmt == 'p')
 		ft_printpointer(ap);
-	else if (*fmt == 'd')
-		return ;
-	else if (*fmt == 'i')
-		return ;
+	else if (*fmt == 'd' || *fmt == 'i')
+		ft_printdecimal(ap);
 	else if (*fmt == 'u')
-		return ;
+		ft_printunsigned(ap);
 	else if (*fmt == 'x')
 		return ;
 	else if (*fmt == 'X')
