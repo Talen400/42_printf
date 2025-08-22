@@ -1,19 +1,24 @@
-#include "printf.h"
+#include "ft_printf.h"
 
-static void	ft_putnbr(unsigned int num)
+static int	ft_putnbr(unsigned int num, int start)
 {
-	char	rest;
+	char		rest;
+	static int	len;
 
-	if (num > 10)
-		ft_putnbr(num / 10);
+	len = start;
+	if (num >= 10)
+		len = ft_putnbr(num / 10, len + 1);
 	rest = (num % 10) + '0';
 	ft_putchar_fd(rest, 1);
+	return (len);
 }
 
-void	ft_printunsigned(va_list ap)
+int	ft_printunsigned(va_list ap)
 {
+	int				len;
 	unsigned int	num;
 	
 	num = va_arg(ap, unsigned int );
-	ft_putnbr(num);
+	len = ft_putnbr(num, 0) + 1;
+	return (len);
 }

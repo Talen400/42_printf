@@ -1,19 +1,31 @@
-#include "printf.h"
+#include "ft_printf.h"
 
-static void	ft_puthex(char *hex, unsigned long long num)
+static int	ft_puthex(char *hex, unsigned long long num, int start)
 {
-	if (num > 16)
-		ft_puthex(hex, num / 16);
-	ft_putchar_fd(hex[num % 16],1);
+	static int	len;
+
+	len = start;
+	if (num >= 16)
+		ft_puthex(hex, num / 16, len + 1);
+	ft_putchar_fd(hex[num % 16], 1);
+	return (len);
 }
 
-void	ft_printpointer(va_list ap)
+int	ft_printpointer(va_list ap)
 {
+	int		len;
 	char	*hex;
 	unsigned long long	num;
 
-	hex = "0123456789abcedf";
-	num = va_arg(ap, unsigned long long);
+	hex = "0123456789abcdef";
+	num = va_arg(ap, unsigned long long );
+	if (!num)
+	{
+		ft_putstr_fd("(nil)", 1);
+		return (5);
+	}
 	ft_putstr_fd("0x", 1);
-	ft_puthex(hex, num);
+	len = 2;
+	len += ft_puthex(hex, num, 0) + 1;
+	return (len);
 }

@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlavared <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 15:52:43 by tlavared          #+#    #+#             */
-/*   Updated: 2025/08/20 17:33:09 by tlavared         ###   ########.fr       */
+/*   Created: 2025/07/19 12:09:06 by tlavared          #+#    #+#             */
+/*   Updated: 2025/07/23 15:10:39 by tlavared         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef PRINTF_H
-# define PRINTF_H
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
 
-// Para testes - remover depois
-# include <stdio.h>
-
-# include "libft.h"
-# include <stdarg.h>
-
-int		ft_printf(const char *fmt, ...);
-void	ft_printchar(va_list ap);
-void	ft_printstr(va_list ap);
-void	ft_printpointer(va_list ap);
-void	ft_printdecimal(va_list ap);
-void	ft_printunsigned(va_list ap);
-
-#endif
+	len = 0;
+	while (*s)
+	{
+		len++;
+		s++;
+	}
+	return (len);
+}
