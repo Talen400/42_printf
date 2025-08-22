@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static int	ft_puthex(char *hex, unsigned long long num, int start)
+int	ft_puthex(char *hex, unsigned long long num, int start)
 {
 	static int	len;
 

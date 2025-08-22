@@ -42,4 +42,9 @@ int main(void)
 
 	printf("printf: NULL %s NULL \n", str);
 	ft_printf("ft_printf: NULL %s NULL \n", str);
+
+	printf("%x\n", 12314123);
+	printf("%x\n", 255);
+	printf("%x\n", 16);
+	printf("%x\n", 0);
 }
