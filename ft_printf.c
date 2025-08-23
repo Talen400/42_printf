@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlavared <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/22 21:06:28 by tlavared          #+#    #+#             */
+/*   Updated: 2025/08/22 21:07:13 by tlavared         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_type(va_list ap, char *fmt)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (*fmt == 'c')
@@ -16,9 +28,9 @@ static int	ft_type(va_list ap, char *fmt)
 	else if (*fmt == 'u')
 		len = ft_printunsigned(ap);
 	else if (*fmt == 'x')
-		return (0);
+		len = ft_printhexalower(ap);
 	else if (*fmt == 'X')
-		return (0);
+		len = ft_printhexaupper(ap);
 	else if (*fmt == '%')
 	{
 		write(1, "%", 1);
@@ -29,7 +41,7 @@ static int	ft_type(va_list ap, char *fmt)
 
 int	ft_printf(const char *fmt, ...)
 {
-	va_list ap;
+	va_list	ap;
 	int		len;
 
 	len = 0;

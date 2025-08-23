@@ -6,7 +6,7 @@ CC = cc
 FLAGS = -g -Wall -Werror -Wextra
 
 SRC = ft_printf.c ft_printpointer.c ft_printchar.c ft_printdecimal.c \
-	  ft_printstr.c ft_printunsigned.c
+	  ft_printstr.c ft_printunsigned.c ft_printhexa.c
 
 OBJ_F = objs
 OBJ = $(addprefix $(OBJ_F)/,$(SRC:.c=.o))

@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "stdio.h"
 
 int main(void)
 {
@@ -47,4 +48,12 @@ int main(void)
 	printf("%x\n", 255);
 	printf("%x\n", 16);
 	printf("%x\n", 0);
+	
+	printf("printf: %x\n", 255);
+	len = ft_printf("ft_printf: %x\n", 255);
+	ft_printf("len: %d\n", len);
+
+	printf("printf: %X\n", 255);
+	len = ft_printf("ft_printf: %X\n", 255);
+	ft_printf("len: %d\n", len);
 }
