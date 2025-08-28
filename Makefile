@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-NAME_TEST = printf
+#NAME_TEST = printf
 
 CC = cc
 FLAGS = -g -Wall -Werror -Wextra
@@ -15,12 +15,12 @@ LIBFT = libft/libft.a
 
 all: $(OBJ_F) $(NAME)
 
-$(NAME_TEST): $(OBJ) $(LIBFT) objs/main.o
-	$(CC) $(FLAGS) $^ -o $@
+#$(NAME_TEST): $(OBJ) $(LIBFT) objs/main.o
+#	$(CC) $(FLAGS) $^ -o $@
 
 $(NAME): $(OBJ) $(LIBFT)
-	cp $(LIBFT) $@
-	ar rcs $@ $^ $(LIBFT)
+	cd $(OBJ_F) && ar -x ../$(LIBFT)
+	ar rcs $@ $(OBJ) $(OBJ_F)/*.o
 
 $(OBJ_F)/%.o:%.c
 	$(CC) $(FLAGS) -c $^ -o $@
@@ -28,8 +28,8 @@ $(OBJ_F)/%.o:%.c
 $(OBJ_F):
 	mkdir $@
 
-objs/main.o: main.c
-	$(CC) $(FLAGS) -c $^ -o $@
+#objs/main.o: main.c
+#	$(CC) $(FLAGS) -c $^ -o $@
 
 $(LIBFT):
 	make bonus -C libft
