@@ -33,13 +33,19 @@ $(OBJ_F):
 	@echo "\n$(GREEN)> Compilating printf...$(RESET)\n"
 	mkdir $@
 
+$(LIBFT):
+	@echo "\n$(YELLOW)> Compilation libft...$(YELLOW)"
+	make -C libft
+
 clean:
 	@echo "\n$(RED)> Cleaning objs...$(RESET)\n"
 	rm -rf $(OBJ_F)
+	make -C libft clean
 
 fclean: clean
 	@echo "\n$(RED)> Cleaning binaries and objs...$(RESET)\n"
 	rm -f $(NAME) $(NAME_TEST)
+	make -C libft fclean
 
 re: fclean all
 
