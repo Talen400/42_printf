@@ -1,46 +1,55 @@
-NAME = libftprintf.a
+NAME := libftprintf.a
+CC := cc
+CFLAGS := -Wall -Werror -Wextra
 
-CC = cc
-FLAGS = -g -Wall -Werror -Wextra
+LIBFT_DIR = libft/
+LIBFT := $(LIBFT_DIR)/libft.a
 
-SRC = ft_printf.c ft_printpointer.c ft_printchar.c ft_printdecimal.c \
-	  ft_printstr.c ft_printunsigned.c ft_printhexa.c
+SRCS_DIR := srcs
+SRCS := $(SRCS_DIR)/ft_printf.c # \
+		other
 
-OBJ_DIR = objs
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-LIBFT_DIR = libft
-LIBFT = libft/libft.a
+OBJS_DIR := objs
+OBJS := $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 
-RED = \033[0;31m
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RESET = \033[0m
+HEADERS := includes/ft_printf.h
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	@echo "\n$(GREEN)> Compilating libftprintf.a...$(RESET)\n"
+$(NAME): $(OBJS) $(LIBFT)
 	cp $(LIBFT) $@
-	ar rcs $@ $(OBJ)
+	ar rcs $@ $(OBJS)
 
-$(OBJ_DIR)/%.o:%.c
-	mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -c $< -o $@
+$(OBJS):$(SRCS)
+	mkdir -p $(OBJS_DIR)
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIBFT):
-	@echo "\n$(YELLOW)> Compilation libft...$(YELLOW)"
 	make -C $(LIBFT_DIR)
 
+TEST_OUT = test_out
+
 clean:
-	@echo "\n$(RED)> Cleaning objs...$(RESET)\n"
-	rm -rf $(OBJ)
-	make -C $(LIBFT_DIR) clean
+	rm -rf $(OBJS_DIR) $(TEST_OUT)
+	make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	@echo "\n$(RED)> Cleaning binaries and objs...$(RESET)\n"
-	rm -f $(NAME) $(NAME_TEST)
-	make -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+FILE_TEST = test.c
+
+test: re
+	cc $(FILE_TEST) libftprintf.a -o test_out
+	./$(TEST_OUT) || true
+
+val: test
+	valgrind \
+		--leak-check=full \
+		--show-leak-kinds=all \
+		./$(TEST_OUT)
+
+.PHONY= all clean fclean re test
+.DEFAULT_GOAL := all
