@@ -43,6 +43,17 @@ typedef struct	s_conv
 	int		is_numeric;
 }	t_conv;
 
+// srcs/ft_printf.c
 int			ft_printf(const char *fmt, ...);
+
+// srcs/parse/ft_parse_flags.c
 const char	*ft_parse_flags(const char *fmt, t_flags *flags, va_list *ap);
+
+// srcs/print/ft_conv_int.c
+t_conv	ft_conv_int(va_list *ap, t_flags *flags);
+
+// srcs/print/helpers.c
+char	*ft_ultoa_base(unsigned long n, int base);
+char	*ft_str_zero_pad(char *s, int zeros);
+
 #endif

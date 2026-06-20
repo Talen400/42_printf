@@ -6,7 +6,7 @@ LIBFT_DIR = libft/
 LIBFT := $(LIBFT_DIR)/libft.a
 
 SRCS_DIR := srcs
-SRCS := $(SRCS_DIR)/ft_printf.c # \
+SRCS := #$(SRCS_DIR)/ft_printf.c # \
 		other
 
 OBJS_DIR := objs
