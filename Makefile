@@ -20,7 +20,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	cp $(LIBFT) $@
 	ar rcs $@ $(OBJS)
 
-$(OBJS):$(SRCS)
+$(OBJS):$(SRCS) $(HEADERS)
 	mkdir -p $(OBJS_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 
